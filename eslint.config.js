@@ -46,6 +46,18 @@ export default tseslint.config([
       "prettier/prettier": "error", // red-line any formatting issues
       "react/prop-types": "off",
       "react/react-in-jsx-scope": "off",
+      "max-len": [
+        "error",
+        {
+          code: 80,
+          tabWidth: 2,
+          ignoreUrls: true,
+          ignoreStrings: true,
+          ignoreTemplateLiterals: true,
+          ignoreRegExpLiterals: true,
+          ignoreComments: true,
+        },
+      ],
       semi: ["warn", "always"],
       "arrow-spacing": 2,
       "arrow-body-style": ["error", "as-needed"],

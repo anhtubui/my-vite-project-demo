@@ -5,5 +5,9 @@
   "semi": true,
   "trailingComma": "es5",
   "endOfLine": "lf",
-  "singleAttributePerLine": true
+  "singleAttributePerLine": true,
+  "bracketSameLine": false,
+  "arrowParens": "always",
+  "bracketSpacing": true,
+  "plugins": ["prettier-plugin-tailwindcss"]
 }

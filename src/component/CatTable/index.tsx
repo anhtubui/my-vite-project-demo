@@ -1,44 +1,110 @@
+import Image from "@/component/ui/Image";
 import { useGetCats } from "@/hooks/query/useGetCatsQuery";
 import styled from "@emotion/styled";
+import styles from "./CatTable.module.css";
 
 const CatTableStyled = styled.div``;
 
+// Skeleton row component
+const SkeletonRow = () => (
+  <tr className={styles.tr}>
+    <td className={styles.td}>
+      <div className="skeleton skeleton-image"></div>
+    </td>
+    <td className={styles.td}>
+      <div className="skeleton skeleton-text-medium"></div>
+    </td>
+    <td className={styles.td}>
+      <div className="skeleton skeleton-text-short"></div>
+    </td>
+    <td className={styles.td}>
+      <div className="skeleton skeleton-text-long"></div>
+    </td>
+    <td className={styles.td}>
+      <div className="skeleton skeleton-text-short"></div>
+    </td>
+    <td className={styles.td}>
+      <div className="skeleton skeleton-text-short"></div>
+    </td>
+    <td className={styles.td}>
+      <div className="skeleton skeleton-text-short"></div>
+    </td>
+    <td className={styles.td}>
+      <div className="skeleton skeleton-text-short"></div>
+    </td>
+  </tr>
+);
+
 export default function CatTable() {
-  const { data, isLoading, isError, fetchNextPage, hasNextPage } = useGetCats({
+  const { data, fetchNextPage, isLoading, isFetchingNextPage } = useGetCats({
     limit: 20,
   });
   const cats = data?.pages.flatMap((page) => page) ?? [];
+
+  // Show skeleton rows when loading initial data
+  const showSkeletons = isLoading;
+  const skeletonRows = Array.from({ length: 5 }, (_, index) => (
+    <SkeletonRow key={`skeleton-${index}`} />
+  ));
+
   return (
-    <CatTableStyled className="w-full flex flex-col gap-4">
-      <div className="relative w-full overflow-x-auto rounded-md border border-gray-200">
-        <table className="w-full">
-          <thead className="bg-gray-100 [&_tr]:border-b [&_tr]:border-gray-200">
-            <tr className="">
-              <th>Name</th>
-              <th>Origin</th>
-              <th>Breeds</th>
-              <th>Weight</th>
-              <th>Life Span</th>
-              <th>Width</th>
-              <th>Height</th>
+    <CatTableStyled className={styles.container}>
+      <div className={styles.tableWrapper}>
+        <table className={styles.table}>
+          <thead className={styles.thead}>
+            <tr className={styles.tr}>
+              <th className={styles.th}>Image</th>
+              <th className={styles.th}>Name</th>
+              <th className={styles.th}>Origin</th>
+              <th className={styles.th}>Breeds</th>
+              <th className={styles.th}>Weight</th>
+              <th className={styles.th}>Life Span</th>
+              <th className={styles.th}>Width</th>
+              <th className={styles.th}>Height</th>
             </tr>
           </thead>
           <tbody>
-            {cats.map((cat) => (
-              <tr key={cat.id}>
-                <td>{cat.breeds[0].name}</td>
-                <td>{cat.breeds[0].origin}</td>
-                <td>{cat.breeds.map((breed) => breed.name).join(", ")}</td>
-                <td>{cat.breeds[0].weight.metric} kg</td>
-                <td>{cat.breeds[0].life_span}</td>
-                <td>{cat.width}</td>
-                <td>{cat.height}</td>
-              </tr>
-            ))}
+            {showSkeletons
+              ? skeletonRows
+              : cats.map((cat) => (
+                  <tr
+                    key={cat.id}
+                    className={styles.tr}
+                  >
+                    <td className={styles.td}>
+                      <Image
+                        src={cat.url}
+                        alt={cat.breeds[0].name}
+                        width={64}
+                        height={64}
+                        fallbackText="No Cat Image"
+                      />
+                    </td>
+                    <td className={styles.td}>{cat.breeds[0].name}</td>
+                    <td className={styles.td}>{cat.breeds[0].origin}</td>
+                    <td className={styles.td}>
+                      {cat.breeds.map((breed) => breed.name).join(", ")}
+                    </td>
+                    <td className={styles.td}>
+                      {cat.breeds[0].weight.metric} kg
+                    </td>
+                    <td className={styles.td}>{cat.breeds[0].life_span}</td>
+                    <td className={styles.td}>{cat.width}</td>
+                    <td className={styles.td}>{cat.height}</td>
+                  </tr>
+                ))}
+            {/* Show skeleton rows when fetching next page */}
+            {isFetchingNextPage && skeletonRows}
           </tbody>
         </table>
       </div>
-      <button onClick={() => fetchNextPage()}>Next</button>
+      <button
+        className={styles.loadMoreButton}
+        onClick={() => fetchNextPage()}
+        disabled={isFetchingNextPage}
+      >
+        {isFetchingNextPage ? "Loading..." : "Next"}
+      </button>
     </CatTableStyled>
   );
 }

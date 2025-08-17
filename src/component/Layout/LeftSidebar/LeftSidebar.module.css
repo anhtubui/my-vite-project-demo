@@ -1,0 +1,9 @@
+@reference "@/App.css";
+
+.container {
+  @apply relative flex-shrink-0 bg-white shadow-md transition-all duration-300;
+}
+
+.link {
+  @apply flex w-full items-center rounded-lg px-3 py-2 text-left transition-colors;
+}

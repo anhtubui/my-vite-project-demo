@@ -1,0 +1,42 @@
+@reference "./index.css";
+
+main {
+  @apply flex-1 pt-16;
+}
+
+/* Global skeleton styles */
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+.skeleton {
+  @apply rounded bg-gray-200;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200px 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.skeleton-image {
+  @apply h-16 w-16 rounded-lg;
+}
+
+.skeleton-text {
+  @apply h-4 rounded;
+}
+
+.skeleton-text-short {
+  @apply h-4 w-20 rounded;
+}
+
+.skeleton-text-medium {
+  @apply h-4 w-32 rounded;
+}
+
+.skeleton-text-long {
+  @apply h-4 w-40 rounded;
+}
