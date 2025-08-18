@@ -1,6 +1,7 @@
 import Image from "@/component/ui/Image";
 import { useGetCats } from "@/hooks/query/useGetCatsQuery";
 import styled from "@emotion/styled";
+import { Button } from "my-component-library-1204";
 import styles from "./CatTable.module.css";
 
 const CatTableStyled = styled.div``;
@@ -98,13 +99,14 @@ export default function CatTable() {
           </tbody>
         </table>
       </div>
-      <button
-        className={styles.loadMoreButton}
+      <Button
+        className="w-fit shadow-md!"
         onClick={() => fetchNextPage()}
         disabled={isFetchingNextPage}
+        variant="outline"
       >
         {isFetchingNextPage ? "Loading..." : "Next"}
-      </button>
+      </Button>
     </CatTableStyled>
   );
 }

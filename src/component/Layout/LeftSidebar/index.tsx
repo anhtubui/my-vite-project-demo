@@ -3,6 +3,7 @@ import ChevronLeft from "@/component/ui/Icons/ChevronLeft";
 import HomeIcon from "@/component/ui/Icons/HomeIcon";
 import PawPrint from "@/component/ui/Icons/PawPrint";
 import clsx from "clsx";
+import { Button } from "my-component-library-1204";
 import { useState } from "react";
 import { Link, useLocation } from "react-router";
 import styles from "./LeftSidebar.module.css";
@@ -51,9 +52,10 @@ export default function LeftSidebar() {
         </nav>
       </div>
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 transform">
-        <button
+        <Button
           onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-          className="flex items-center justify-center bg-white p-2 shadow-md hover:bg-gray-50"
+          className="shadow-md!"
+          variant="secondary"
         >
           <ChevronLeft
             className={clsx(
@@ -61,7 +63,7 @@ export default function LeftSidebar() {
               sidebarCollapsed ? "rotate-180" : ""
             )}
           />
-        </button>
+        </Button>
       </div>
     </div>
   );

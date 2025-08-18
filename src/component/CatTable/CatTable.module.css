@@ -5,7 +5,7 @@
 }
 
 .tableWrapper {
-  @apply relative w-full overflow-x-auto rounded-md border border-gray-200;
+  @apply relative mb-5 w-full overflow-x-auto rounded-md border border-gray-200;
 }
 
 .table {
@@ -42,16 +42,4 @@
 
 .td {
   @apply border-b border-gray-200 px-2 py-2 align-middle whitespace-nowrap;
-}
-
-.loadMoreButton {
-  @apply cursor-pointer rounded-md border-none bg-blue-500 px-4 py-2 font-medium text-white transition-colors;
-}
-
-.loadMoreButton:hover {
-  @apply bg-blue-600;
-}
-
-.loadMoreButton:focus {
-  @apply ring-2 ring-blue-500 ring-offset-2 outline-none;
 }
