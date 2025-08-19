@@ -1,6 +1,7 @@
+import { catsAtom } from "@/atom/catAtoms";
 import Image from "@/component/ui/Image";
-import { useGetCats } from "@/hooks/query/useGetCatsQuery";
 import styled from "@emotion/styled";
+import { useAtom } from "jotai";
 import { Button } from "my-component-library-1204";
 import styles from "./CatTable.module.css";
 
@@ -37,9 +38,8 @@ const SkeletonRow = () => (
 );
 
 export default function CatTable() {
-  const { data, fetchNextPage, isLoading, isFetchingNextPage } = useGetCats({
-    limit: 20,
-  });
+  const [{ data, fetchNextPage, isLoading, isFetchingNextPage }] =
+    useAtom(catsAtom);
   const cats = data?.pages.flatMap((page) => page) ?? [];
 
   // Show skeleton rows when loading initial data

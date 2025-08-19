@@ -1,3 +1,4 @@
+import PageLimitSetter from "@/component/CatTable/PageLimitSetter";
 import BarChartIcon from "@/component/ui/Icons/BarChartIcon";
 import ChevronLeft from "@/component/ui/Icons/ChevronLeft";
 import HomeIcon from "@/component/ui/Icons/HomeIcon";
@@ -21,7 +22,7 @@ export default function LeftSidebar() {
             <h2 className="text-xl font-bold text-gray-900">Cat Dashboard</h2>
           )}
         </div>
-        <nav className="flex-1 space-y-2">
+        <nav className="space-y-2">
           <Link
             to="/dashboard"
             className={clsx(
@@ -50,6 +51,7 @@ export default function LeftSidebar() {
             {!sidebarCollapsed && "Analytics"}
           </Link>
         </nav>
+        <PageLimitSetter className="mt-5" />
       </div>
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 transform">
         <Button

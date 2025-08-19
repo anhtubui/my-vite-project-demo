@@ -11,5 +11,5 @@ export const useGetCats = ({
     initialPageParam: 0,
     queryFn: ({ pageParam }: { pageParam: number }) =>
       catApi.getCats({ page: pageParam, limit }),
-    getNextPageParam: (_last, _pages) => _pages.length,
+    getNextPageParam: (_last, _pages, lastPageParams) => lastPageParams + 1,
   });
